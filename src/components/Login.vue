@@ -1,10 +1,8 @@
 <template>
-        
-    <v-form ref="form" v-model="valid" lazy-validation>
-      <div class="box_align">
-      <v-col>
-          <div class="email">
-            <v-text-field
+  <v-form ref="form" v-model="valid" lazy-validation>
+    <v-col>
+      <div class="email">
+        <v-text-field
           outlined
           dense
           autocomplete="off"
@@ -14,9 +12,9 @@
           required
         >
         </v-text-field>
-        </div>
-        <div class="password">
-          <v-text-field
+      </div>
+      <div class="password">
+        <v-text-field
           outlined
           dense
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -28,112 +26,132 @@
           required
         >
         </v-text-field>
-        </div>
-        <div>
-            <a
-              href="http://localhost:8080/forget"
-              class="Forget_password"
-              width="350"
-              height="20"
-              >Forget password</a
-            >
-          </div>
-        
-        <div style="
+      </div>
+      <div style="margin-top: -20px; ">
+        <a
+       
+          href="http://localhost:8080/forget"
+          
+          class="Forget_password"
+          width="368"
+          height="20"
+          >Forget password</a
+        >
+      </div>
+
+      <div
+        style="
           top: 398px;
           left: 727px;
-          width: 280px;
-          height: 37px;
-          background: #a03037 0% 0% no-repeat padding-box;
+          width: 270px;
+          height: 40px;
+          /* background: #a03037 0% 0% no-repeat padding-box; */
           border-radius: 3px;
           color: #ffffff;
           opacity: 1; ;
+          margin-bottom: -10px;
+          
+        
         "
       >
+        <v-btn
+          :disabled="!valid"
+          color="#A03037"
+          class="mr-4"
+          @click="validate"
+        >
+          Login
+          <div style="width: 190px; ">
+          </div>
+        </v-btn>
+      </div>
+      <div style="padding-top: 25px; margin-left: -32px">
+        <b>--OR--</b>
+        <div style="margin-bottom: 50px;width: 350px;">
           <v-btn
+          href="https://www.facebook.com/"
             :disabled="!valid"
-           
-            color="#a03037"
+            color="#4266B2"
             class="mr-4"
             @click="validate"
           >
-            Login
+            FaceBook
+            <div style="padding-left: 5px;">
+
+            </div>
+          </v-btn >
+
+          <v-btn :disabled="!valid" color="" class="mr-4" @click="validate">
+            Google
+            <div style="padding-left: 25px;">
+            </div>
           </v-btn>
         </div>
-      </v-col>
-  </div>  
+      </div>
+    </v-col>
   </v-form>
-  
 </template>
-
+  
 <script>
-// import UserService from "@/services/userService/userService";
+import UserService from '@/Services/UserService/UserService';
 
 export default {
-name: "LoginComponent",
-data: () => ({
-  valid: true,
+  name: "LoginComponent",
+  data: () => ({
+    valid: true,
 
-  Password: "",
+    Password: "",
 
-  passwordRules: [
-    (v) => !!v || "password is required",
-    (v) =>
-      (v && v.length <= 10) || "password must be less than 10 characters",
-  ],
-  email: "",
-  emailRules: [
-    (v) => !!v || "E-mail is required",
-    (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
-  ],
-  showPassword: false,
+    passwordRules: [
+      (v) => !!v || "password is required",
+      (v) =>
+        (v && v.length <= 15) || "password must be less than 15 characters",
+    ],
+    email: "",
+    emailRules: [
+      (v) => !!v || "E-mail is required",
+      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+    ],
+    showPassword: false,
     showCPassword: false,
     sending: false,
-}),
+  }),
+    methods: {
+    validate() {
+      console.log(this.email);
+      console.log(this.Password);
+      let reqData = {
+        email:this.email,
+        password:this.Password,
+      }
+      UserService.prototype.loginService(reqData).then((data)=> {
+        console.log("Response from login", data);
+        localStorage.setItem("token", data.data.token);
+        this.$router.push({path:'/dash'})
+      })
+      .catch((error) => {
+          console.log(error);
+        });
+    }
+  },
+  
 
-methods: {
-  validate() {
-    this.$refs.form.validate();
-    console.log(this.email);
-    console.log(this.Password);
-//       let reqData = {
-//         email: this.email,
-//         password: this.Password,
-//       };
-// //       UserService.prototype
-//         .loginService(reqData)
-//         .then((data) => {
-//           console.log("Response from login", data);
-//           localStorage.setItem("token", data.data.token);
-//           this.$router.push({path:'/dashboard'})
-//         })
-//         .catch((error) => {
-//           console.log(error);
-//         });
-//     },
-//   },
-},
-
-},
+  
 };
 </script>
-<style>
+  <style>
 .email {
-width: 280px;
-display: flex;
+  width: 270px;
+  display: flex;
 }
+
 .password {
-width: 280px;
-display: flex;
+  width: 270px;
+  display: flex;
 }
 
-.box_align {
-padding-bottom: 45px;
-margin-bottom: 90px;
-margin-left: -12px;
+.Forget_password {
+  padding-left: 120px;
+}
 
-}
-.login_button {
-width: 400px;
-}
 </style>

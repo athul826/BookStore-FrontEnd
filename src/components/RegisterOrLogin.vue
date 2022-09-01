@@ -12,17 +12,21 @@
                                 <v-card-title class="text"> ONLINE BOOK SHOPPING </v-card-title>
                             </v-row>
                         </v-card>
-                        <v-card class="main-card1 mx-auto mt-9 pl-5 pr-5">
+                      
+                        <v-card class="card1 mx-auto mt-9 pl-5 pr-5" >
                             <v-tabs centered>
-                                <v-tab>Login</v-tab>
+                                <v-tab >Login</v-tab>
                                 <v-tab-item key="login">
-                                    <div style="padding-left:30px ; margin-top: 70px;">
+                                   <div style="padding-left:30px ; margin-top: 70px;">
                                     <Login />
-                                </div>
+                                    </div>
                                 </v-tab-item>
+                            
                                 <v-tab>Sign up</v-tab>
                                 <v-tab-item key="signUp">
+                                    <div style="padding-left:30px ; margin-top: 30px;">
                                     <SignUp />
+                                    </div>
                                 </v-tab-item>
                                 </v-tabs>
                         </v-card>
@@ -65,31 +69,31 @@ body {
     margin-left: -7px;
 }
 .display-card {
-    top: 0px;
-    left: 0px;
+    
     height: 102%;
-    background-color: #878787;
+    margin-top: -70px;
+    background-color: #C5C5C5;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
 }
-.main-card1 {
-    top: 105px;
+.card1 {
+    top: 50px;
     right: 260px;
     width: 389px;
-    height: 475px;
+    height: 520px;
 }
 .shopping-card {
     top: 167px;
     left: 170px;
-    width: 500px;
-    height: 415px;
+    width: 440px;
+    height: 400px;
     
 }
 .book-image1 {
     height: 220px;
-    width: 290px;
+    width: 300px;
     margin-top: 30px;
     margin-left: 40px;
     justify-self: center;
@@ -98,13 +102,5 @@ body {
     font-size: 15px;
     padding-left: 65px;
 }
-.button123{
-    background:brown;
-    width: 352px;
-    height: 37px;
-    left: 727px;
-    top: 500px;
-    color: white;
-    font-size: 18px;
-}
+
 </style>

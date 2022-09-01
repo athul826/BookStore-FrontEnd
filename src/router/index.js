@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DashboardBarView from '../views/DashboardBarView.vue'
 import SignupOrLogin from '../views/SignupOrLogin.vue'
+import ForgetPasswordView from '../views/ForgetPasswordView.vue'
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,12 @@ const routes = [
     path: '/admin',
     name:'RegisterUI',
     component:SignupOrLogin 
+  },
+
+  {
+    path: '/forget',
+    name: 'ForgetPasswordView',
+    component:ForgetPasswordView
   },
 ]
 
